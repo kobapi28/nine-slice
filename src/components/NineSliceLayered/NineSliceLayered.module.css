@@ -1,0 +1,112 @@
+/* Layered Container Styles */
+.layeredContainer {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  
+  /* GPU acceleration for better performance */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Content layer - always on top */
+.content {
+  position: relative;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+/* Layer management */
+.layeredContainer > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure proper stacking context */
+.layeredContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Shadow effects */
+.layeredContainer.withShadow {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.layeredContainer.withInnerShadow {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.layeredContainer.withOuterShadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.layeredContainer.withBothShadows {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Performance optimizations */
+.layeredContainer.optimized {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+.layeredContainer.optimized * {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layeredContainer {
+    /* Reduce effects on mobile for better performance */
+    transform: none;
+  }
+  
+  .layeredContainer.optimized {
+    contain: layout;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .layeredContainer {
+    outline: 1px solid transparent;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .layeredContainer * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .layeredContainer {
+    /* Flatten layers for print */
+    filter: none !important;
+    box-shadow: none !important;
+  }
+  
+  .layeredContainer * {
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+  }
+}
