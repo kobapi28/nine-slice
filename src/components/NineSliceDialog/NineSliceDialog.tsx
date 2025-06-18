@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { NineSlice, NineSliceProps } from '../NineSlice/NineSlice';
 import styles from './NineSliceDialog.module.css';
 
-export interface NineSliceDialogProps extends Omit<NineSliceProps, 'onClick'> {
+export interface NineSliceDialogProps {
   /** Whether the dialog is open */
   open: boolean;
   /** Called when the dialog should close */

@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
-  constructor(callback: ResizeObserverCallback) {}
+  constructor(_callback: ResizeObserverCallback) {}
   observe() {}
   unobserve() {}
   disconnect() {}
@@ -32,7 +32,7 @@ global.Image = MockImage as any;
 
 // Mock CSS.supports for border-image tests
 Object.defineProperty(CSS, 'supports', {
-  value: vi.fn((property: string, value: string) => {
+  value: vi.fn((property: string, _value: string) => {
     return property === 'border-image' || property === 'border-image-slice';
   }),
   writable: true,

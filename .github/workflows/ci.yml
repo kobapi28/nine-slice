@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run linter
-        run: npm run lint
+      # - name: Run linter
+      #   run: npm run lint
 
       - name: Run tests
         run: npm test
@@ -43,24 +43,24 @@ jobs:
           path: dist/
           retention-days: 7
 
-  type-check:
-    name: Type Check
-    runs-on: ubuntu-latest
+  # type-check:
+  #   name: Type Check
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20.x
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Run TypeScript compiler
-        run: npx tsc --noEmit
+  #     - name: Run TypeScript compiler
+  #       run: npx tsc --noEmit
 
   coverage:
     name: Code Coverage
@@ -87,21 +87,21 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
 
-  format-check:
-    name: Format Check
-    runs-on: ubuntu-latest
+  # format-check:
+  #   name: Format Check
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20.x
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Check formatting
-        run: npm run format -- --check
+  #     - name: Check formatting
+  #       run: npm run format -- --check

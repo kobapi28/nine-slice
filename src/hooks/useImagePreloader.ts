@@ -254,7 +254,7 @@ export function preloadImages(
       retryCount,
       retryDelay,
       abortController.signal,
-      (progress, loadedImages, failedImages, error) => {
+      (progress, loadedImages, failedImages, _error) => {
         if (progress === 100) {
           resolve({ loadedImages, failedImages });
         }

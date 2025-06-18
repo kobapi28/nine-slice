@@ -2,7 +2,7 @@ import React, { useMemo, CSSProperties, ReactNode } from 'react';
 import { NineSliceLayer } from './NineSliceLayer';
 import styles from './NineSliceLayered.module.css';
 
-export interface NineSliceLayeredProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface NineSliceLayeredProps {
   /** Layer configurations */
   layers: Array<{
     /** Images for this layer */

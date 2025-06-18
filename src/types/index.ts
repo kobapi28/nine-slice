@@ -137,7 +137,7 @@ export interface InvalidConfigError extends Error {
 
 export interface RenderError extends Error {
   type: 'RENDER_ERROR';
-  renderMode: RenderMode;
+  renderMode: import('./common').RenderMode;
 }
 
 /**
@@ -156,7 +156,7 @@ export interface UseNineSliceReturn {
 
 export interface UseAnimationReturn {
   /** Current animation state */
-  currentState: keyof AnimationStates;
+  currentState: keyof import('./common').AnimationStates;
   /** Set animation state */
   setState: (state: string) => void;
   /** Check if transitioning */
