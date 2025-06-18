@@ -1,0 +1,462 @@
+/* Base frame styles */
+.frame {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.frameNineSlice {
+  width: 100%;
+  height: 100%;
+}
+
+.frameContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Frame variants */
+.frame--golden {
+  --frame-color: #ffd700;
+  --frame-accent: #ffed4e;
+  --frame-shadow: rgba(255, 215, 0, 0.5);
+}
+
+.frame--silver {
+  --frame-color: #c0c0c0;
+  --frame-accent: #e8e8e8;
+  --frame-shadow: rgba(192, 192, 192, 0.5);
+}
+
+.frame--wood {
+  --frame-color: #8b4513;
+  --frame-accent: #d2691e;
+  --frame-shadow: rgba(139, 69, 19, 0.5);
+}
+
+.frame--stone {
+  --frame-color: #696969;
+  --frame-accent: #a9a9a9;
+  --frame-shadow: rgba(105, 105, 105, 0.5);
+}
+
+.frame--modern {
+  --frame-color: #2c3e50;
+  --frame-accent: #34495e;
+  --frame-shadow: rgba(44, 62, 80, 0.3);
+}
+
+.frame--ornate {
+  --frame-color: #4a148c;
+  --frame-accent: #7b1fa2;
+  --frame-shadow: rgba(74, 20, 140, 0.6);
+}
+
+.frame--minimal {
+  --frame-color: #ecf0f1;
+  --frame-accent: #bdc3c7;
+  --frame-shadow: rgba(189, 195, 199, 0.3);
+}
+
+/* Corner styles */
+.frame--rounded .frameNineSlice {
+  border-radius: 8px;
+}
+
+.frame--square .frameNineSlice {
+  border-radius: 0;
+}
+
+.frame--ornate .frameNineSlice {
+  border-radius: 12px;
+}
+
+.frame--beveled .frameNineSlice {
+  clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+}
+
+/* Content type optimizations */
+.frame--portrait {
+  aspect-ratio: 3/4;
+}
+
+.frame--avatar {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.frame--avatar .frameNineSlice {
+  border-radius: 50%;
+}
+
+.frame--card {
+  aspect-ratio: 3/5;
+  max-width: 200px;
+}
+
+/* Shadow effects */
+.frame--shadow {
+  filter: drop-shadow(0 4px 8px var(--frame-shadow, rgba(0, 0, 0, 0.3)));
+}
+
+.frame--shadow-inner {
+  box-shadow: inset 0 2px 4px var(--frame-shadow, rgba(0, 0, 0, 0.3));
+}
+
+.frame--shadow-outer {
+  box-shadow: 0 4px 8px var(--frame-shadow, rgba(0, 0, 0, 0.3));
+}
+
+.frame--shadow-both {
+  box-shadow: 
+    0 4px 8px var(--frame-shadow, rgba(0, 0, 0, 0.3)),
+    inset 0 2px 4px var(--frame-shadow, rgba(0, 0, 0, 0.3));
+}
+
+/* Glow effects */
+.frame--glow {
+  --glow-color: var(--frame-color, #ffd700);
+  box-shadow: 0 0 20px var(--glow-color);
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from {
+    box-shadow: 0 0 20px var(--glow-color);
+  }
+  to {
+    box-shadow: 0 0 30px var(--glow-color), 0 0 40px var(--glow-color);
+  }
+}
+
+/* Animation effects */
+.frame--shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.frame--shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer var(--animation-duration, 2000ms) infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.frame--pulse {
+  animation: pulse var(--animation-duration, 2000ms) ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(calc(1 + 0.05 * var(--animation-intensity, 1)));
+    opacity: 0.8;
+  }
+}
+
+/* Status indicators */
+.frame--active {
+  --status-color: #27ae60;
+}
+
+.frame--inactive {
+  --status-color: #95a5a6;
+  opacity: 0.7;
+}
+
+.frame--warning {
+  --status-color: #f39c12;
+}
+
+.frame--error {
+  --status-color: #e74c3c;
+}
+
+.frame--success {
+  --status-color: #27ae60;
+}
+
+/* Game UI rarity colors */
+.frame--common {
+  --frame-color: #95a5a6;
+  --frame-accent: #bdc3c7;
+}
+
+.frame--uncommon {
+  --frame-color: #27ae60;
+  --frame-accent: #2ecc71;
+}
+
+.frame--rare {
+  --frame-color: #3498db;
+  --frame-accent: #5dade2;
+}
+
+.frame--epic {
+  --frame-color: #9b59b6;
+  --frame-accent: #bb8fce;
+}
+
+.frame--legendary {
+  --frame-color: #f39c12;
+  --frame-accent: #f8c471;
+  animation: legendary-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes legendary-glow {
+  from {
+    box-shadow: 0 0 20px var(--frame-color);
+  }
+  to {
+    box-shadow: 0 0 40px var(--frame-color), 0 0 60px var(--frame-color);
+  }
+}
+
+.frame--enchanted {
+  position: relative;
+}
+
+.frame--locked::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.frame--new {
+  position: relative;
+}
+
+/* Responsive scaling */
+.frame--responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .frame--responsive {
+    --frame-thickness: calc(var(--frame-thickness, 32px) * 0.75);
+  }
+}
+
+@media (max-width: 480px) {
+  .frame--responsive {
+    --frame-thickness: calc(var(--frame-thickness, 32px) * 0.5);
+  }
+}
+
+/* UI overlays and indicators */
+.levelBadge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #2c3e50;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.levelText {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.statusIndicator {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+}
+
+.statusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--status-color, #95a5a6);
+  box-shadow: 0 0 0 2px #fff, 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.statusDot--active {
+  background: #27ae60;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+.statusDot--warning {
+  background: #f39c12;
+  animation: status-blink 1s ease-in-out infinite alternate;
+}
+
+.statusDot--error {
+  background: #e74c3c;
+  animation: status-blink 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes status-blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+.lockIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.lockIcon {
+  font-size: 24px;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.newIndicator {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  animation: new-bounce 2s ease-in-out infinite;
+}
+
+@keyframes new-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.newText {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.enchantedEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.enchantedGlow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(138, 43, 226, 0.3),
+    transparent,
+    rgba(75, 0, 130, 0.3),
+    transparent
+  );
+  background-size: 400% 400%;
+  animation: enchanted-flow 4s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+@keyframes enchanted-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .frame {
+    --frame-shadow: rgba(0, 0, 0, 0.8);
+  }
+  
+  .statusDot {
+    box-shadow: 0 0 0 3px #fff, 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .frame--shimmer::before,
+  .frame--pulse,
+  .frame--glow,
+  .frame--legendary,
+  .statusDot--active,
+  .statusDot--warning,
+  .statusDot--error,
+  .newIndicator,
+  .enchantedGlow {
+    animation: none;
+  }
+  
+  .frame--glow {
+    box-shadow: 0 0 20px var(--glow-color);
+  }
+}
