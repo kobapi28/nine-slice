@@ -1,0 +1,493 @@
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  
+  /* Fade in animation */
+  opacity: 0;
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+.overlay[data-animating="true"] {
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+/* Dialog container */
+.dialogContainer {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  outline: none;
+}
+
+/* Dialog content wrapper */
+.dialog {
+  position: relative;
+  background: transparent;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: inherit;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header styles */
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  min-height: 60px;
+  position: relative;
+}
+
+.dialogTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  line-height: 1.2;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.closeButton:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.closeIcon {
+  font-size: 24px;
+  line-height: 1;
+  color: #666;
+  font-weight: 300;
+}
+
+/* Body styles */
+.dialogBody {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+/* Footer styles */
+.dialogFooter {
+  flex-shrink: 0;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Animation variants */
+.animation--fade {
+  opacity: 0;
+  animation: dialogFadeIn 0.15s ease-out forwards;
+}
+
+.animation--fade[data-animating="true"] {
+  animation: dialogFadeOut 0.15s ease-in forwards;
+}
+
+.animation--scale {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: dialogScaleIn 0.15s ease-out forwards;
+}
+
+.animation--scale[data-animating="true"] {
+  animation: dialogScaleOut 0.15s ease-in forwards;
+}
+
+.animation--slide-up {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: dialogSlideUp 0.2s ease-out forwards;
+}
+
+.animation--slide-up[data-animating="true"] {
+  animation: dialogSlideDown 0.15s ease-in forwards;
+}
+
+.animation--slide-down {
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dialogSlideDown 0.2s ease-out forwards;
+}
+
+.animation--slide-down[data-animating="true"] {
+  animation: dialogSlideUp 0.15s ease-in forwards;
+}
+
+.animation--none {
+  opacity: 1;
+  transform: none;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialogFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialogScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialogScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes dialogSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dialogSlideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+/* Variant styles */
+
+/* Fantasy variant */
+.dialog--fantasy {
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+.dialog--fantasy .dialogTitle {
+  color: #8B4513;
+  font-family: serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+}
+
+.dialog--fantasy .closeButton--fantasy {
+  color: #8B4513;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.dialog--fantasy .closeButton--fantasy:hover {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+  transform: scale(1.1);
+}
+
+.dialog--fantasy .closeButton--fantasy .closeIcon {
+  color: #8B4513;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Medieval variant */
+.dialog--medieval {
+  filter: drop-shadow(0 0 15px rgba(139, 69, 19, 0.4));
+}
+
+.dialog--medieval .dialogTitle {
+  color: #2F1B14;
+  font-family: serif;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.dialog--medieval .closeButton--medieval {
+  color: #2F1B14;
+  background: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.1));
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  border-radius: 4px;
+}
+
+.dialog--medieval .closeButton--medieval:hover {
+  background: linear-gradient(45deg, rgba(139, 69, 19, 0.2), rgba(160, 82, 45, 0.2));
+  border-color: rgba(139, 69, 19, 0.4);
+}
+
+/* Modern variant */
+.dialog--modern {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.dialog--modern .dialogTitle {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.dialog--modern .closeButton--modern {
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dialog--modern .closeButton--modern:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.dialog--modern .closeButton--modern:active {
+  transform: scale(0.95);
+}
+
+/* Retro variant */
+.dialog--retro {
+  box-shadow: 
+    0 0 0 3px #000,
+    0 0 0 6px #fff,
+    0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dialog--retro .dialogTitle {
+  color: #000;
+  font-family: monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dialog--retro .closeButton--retro {
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.dialog--retro .closeButton--retro:hover {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+}
+
+.dialog--retro .closeIcon {
+  color: inherit;
+}
+
+/* Dark variant */
+.dialog--dark {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.dialog--dark .dialogTitle {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.dialog--dark .closeButton--dark .closeIcon {
+  color: #ffffff;
+}
+
+.dialog--dark .closeButton--dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dialog--dark .dialogFooter {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Light variant */
+.dialog--light {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dialog--light .dialogTitle {
+  color: #333333;
+}
+
+.dialog--light .closeButton--light .closeIcon {
+  color: #666666;
+}
+
+.dialog--light .closeButton--light:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 10px;
+  }
+  
+  .dialogTitle {
+    font-size: 1.25rem;
+  }
+  
+  .closeButton {
+    padding: 12px;
+    margin: -12px;
+  }
+  
+  .closeIcon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 5px;
+  }
+  
+  .dialogHeader {
+    min-height: 50px;
+  }
+  
+  .dialogTitle {
+    font-size: 1.125rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .closeButton {
+    border: 2px solid;
+  }
+  
+  .closeButton:focus {
+    outline-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .animation--fade,
+  .animation--scale,
+  .animation--slide-up,
+  .animation--slide-down {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .closeButton,
+  .dialog--fantasy .closeButton--fantasy,
+  .dialog--modern .closeButton--modern {
+    transition: none !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.dialogContainer:focus {
+  outline: none;
+}
+
+.dialogContainer:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .overlay {
+    position: static;
+    background: none;
+    padding: 0;
+  }
+  
+  .dialog {
+    box-shadow: none;
+    border: 2px solid #000;
+  }
+  
+  .closeButton {
+    display: none;
+  }
+}

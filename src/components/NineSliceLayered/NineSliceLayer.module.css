@@ -1,0 +1,158 @@
+/* Individual Layer Styles */
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  
+  /* GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Animation Classes */
+.slideAnimation {
+  animation-name: slideIn;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%) translateZ(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) translateZ(0);
+    opacity: 1;
+  }
+}
+
+.fadeAnimation {
+  animation-name: fadeIn;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pulseAnimation {
+  animation-name: pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.7;
+    transform: scale(0.95) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.rotateAnimation {
+  animation-name: rotateIn;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-180deg) scale(0) translateZ(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1) translateZ(0);
+    opacity: 1;
+  }
+}
+
+.scaleAnimation {
+  animation-name: scaleIn;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0) translateZ(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateZ(0);
+    opacity: 1;
+  }
+}
+
+/* Layer blend modes support */
+.layer[style*="mix-blend-mode"] {
+  isolation: isolate;
+}
+
+/* Performance optimizations for layers */
+.layer > * {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Blur effects optimization */
+.layer[style*="blur"] {
+  filter-rendering: optimizeSpeed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layer {
+    /* Reduce GPU acceleration on mobile if needed */
+    transform: none;
+  }
+  
+  .layer[style*="blur"] {
+    /* Reduce blur effects on mobile for performance */
+    filter: none !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .slideAnimation,
+  .fadeAnimation,
+  .pulseAnimation,
+  .rotateAnimation,
+  .scaleAnimation {
+    animation: none !important;
+  }
+  
+  .layer {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .layer {
+    filter: contrast(1.2) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .layer {
+    /* Flatten all effects for print */
+    opacity: 1 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
