@@ -1,0 +1,113 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Production build
+dist/
+build/
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+tmp/
+temp/
+
+# Package files
+*.tgz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Storybook
+storybook-static/
+.storybook/out/
+
+# Rollup cache
+.rollup.cache/
+
+# Parcel cache
+.cache/
+.parcel-cache/
+
+# Next.js
+.next/
+out/
+
+# Nuxt.js
+.nuxt/
+
+# Gatsby
+.cache/
+public/
+
+# VuePress
+.vuepress/dist/
+
+# Serverless
+.serverless/
+
+# FuseBox
+.fusebox/
+
+# DynamoDB Local
+.dynamodb/
+
+# TernJS
+.tern-port
+
+# Stores VSCode versions used on dev containers
+.devcontainer/devcontainer.lock
