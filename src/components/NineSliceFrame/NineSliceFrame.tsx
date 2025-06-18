@@ -1,6 +1,6 @@
 import React, { useMemo, CSSProperties } from 'react';
 import { NineSlice } from '../NineSlice';
-import { NineSliceFrameProps as BaseNineSliceFrameProps } from '../../types/common';
+// import { NineSliceFrameProps as BaseNineSliceFrameProps } from '../../types/common';
 import styles from './NineSliceFrame.module.css';
 
 export type FrameVariant = 'golden' | 'silver' | 'wood' | 'stone' | 'modern' | 'ornate' | 'minimal';

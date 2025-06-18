@@ -4,7 +4,7 @@ import { AnimationStates, TransitionConfig } from '../../types/common';
 import { useImagePreloader } from '../../hooks/useImagePreloader';
 import styles from './NineSliceAnimated.module.css';
 
-export interface NineSliceAnimatedProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface NineSliceAnimatedProps {
   /** Base nine-slice props */
   src?: string;
   images?: any;

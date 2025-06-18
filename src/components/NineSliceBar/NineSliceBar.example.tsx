@@ -82,7 +82,7 @@ export const NineSliceBarExample: React.FC = () => {
               width="400px"
               height="16px"
               showLabel={true}
-              labelFormat={(value, max) => `${Math.round(value)} XP`}
+              labelFormat={(value, _max) => `${Math.round(value)} XP`}
               animated={true}
               glowEffect={true}
               gradientFill={true}

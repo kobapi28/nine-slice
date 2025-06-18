@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
-  constructor(callback: ResizeObserverCallback) {}
+  constructor(_callback: ResizeObserverCallback) {}
   observe() {}
   unobserve() {}
   disconnect() {}
@@ -31,7 +32,7 @@ global.Image = MockImage as any;
 
 // Mock CSS.supports for border-image tests
 Object.defineProperty(CSS, 'supports', {
-  value: jest.fn((property: string, value: string) => {
+  value: vi.fn((property: string, _value: string) => {
     return property === 'border-image' || property === 'border-image-slice';
   }),
   writable: true,
@@ -42,8 +43,8 @@ const originalConsoleWarn = console.warn;
 const originalConsoleError = console.error;
 
 beforeEach(() => {
-  console.warn = jest.fn();
-  console.error = jest.fn();
+  console.warn = vi.fn();
+  console.error = vi.fn();
 });
 
 afterEach(() => {

@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   mergeClassNames,
   debounce,
@@ -40,70 +41,70 @@ describe('helpers', () => {
 
   describe('debounce', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('delays function execution', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const debouncedFn = debounce(fn, 100);
 
       debouncedFn();
       expect(fn).not.toHaveBeenCalled();
 
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
     it('cancels previous executions', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const debouncedFn = debounce(fn, 100);
 
       debouncedFn();
       debouncedFn();
       debouncedFn();
 
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
     it('passes arguments correctly', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const debouncedFn = debounce(fn, 100);
 
       debouncedFn('arg1', 'arg2');
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
 
       expect(fn).toHaveBeenCalledWith('arg1', 'arg2');
     });
 
     it('uses the latest arguments when called multiple times', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const debouncedFn = debounce(fn, 100);
 
       debouncedFn('first');
       debouncedFn('second');
       debouncedFn('third');
 
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
       expect(fn).toHaveBeenCalledWith('third');
     });
   });
 
   describe('throttle', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('limits function execution rate', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const throttledFn = throttle(fn, 100);
 
       throttledFn();
@@ -112,14 +113,14 @@ describe('helpers', () => {
 
       expect(fn).toHaveBeenCalledTimes(1);
 
-      jest.advanceTimersByTime(100);
+      vi.advanceTimersByTime(100);
       throttledFn();
 
       expect(fn).toHaveBeenCalledTimes(2);
     });
 
     it('executes immediately on first call', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const throttledFn = throttle(fn, 100);
 
       throttledFn();
@@ -127,7 +128,7 @@ describe('helpers', () => {
     });
 
     it('passes arguments correctly', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const throttledFn = throttle(fn, 100);
 
       throttledFn('arg1', 'arg2');
