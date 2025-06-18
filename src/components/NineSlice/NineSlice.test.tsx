@@ -1,28 +1,33 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { vi } from 'vitest';
 import { NineSlice, NineSliceProps } from './NineSlice';
+import { validateSlices } from '../../utils/validation';
+import { useImagePreloader } from '../../hooks/useImagePreloader';
 
 // Mock the CSS module
-jest.mock('./NineSlice.module.css', () => ({
-  nineSlice: 'nineSlice',
-  loading: 'loading',
-  error: 'error',
-  errorText: 'errorText',
+vi.mock('./NineSlice.module.css', () => ({
+  default: {
+    nineSlice: 'nineSlice',
+    loading: 'loading',
+    error: 'error',
+    errorText: 'errorText',
+  },
 }));
 
 // Mock the image processor
-jest.mock('../../utils/imageProcessor', () => ({
-  processNineSliceImage: jest.fn(),
+vi.mock('../../utils/imageProcessor', () => ({
+  processNineSliceImage: vi.fn(),
 }));
 
 // Mock the validation utility
-jest.mock('../../utils/validation', () => ({
-  validateSlices: jest.fn(() => ({ isValid: true, errors: [] })),
+vi.mock('../../utils/validation', () => ({
+  validateSlices: vi.fn(() => ({ isValid: true, errors: [] })),
 }));
 
 // Mock the image preloader hook
-jest.mock('../../hooks/useImagePreloader', () => ({
-  useImagePreloader: jest.fn(() => ({
+vi.mock('../../hooks/useImagePreloader', () => ({
+  useImagePreloader: vi.fn(() => ({
     loaded: true,
     error: null,
   })),
@@ -37,7 +42,7 @@ describe('NineSlice', () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Rendering', () => {
@@ -73,7 +78,7 @@ describe('NineSlice', () => {
 
   describe('Props validation', () => {
     it('throws error when neither src nor images is provided', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       
       expect(() => {
         render(<NineSlice slices={{ top: 10, right: 10, bottom: 10, left: 10 }} />);
@@ -83,7 +88,7 @@ describe('NineSlice', () => {
     });
 
     it('throws error when both src and images are provided', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       
       const images = {
         topLeft: 'tl.png',
@@ -105,7 +110,7 @@ describe('NineSlice', () => {
     });
 
     it('throws error for unsupported render mode', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       
       expect(() => {
         render(<NineSlice {...defaultProps} renderMode="canvas" as any />);
@@ -134,8 +139,8 @@ describe('NineSlice', () => {
 
   describe('Loading states', () => {
     it('shows loading state when images are not loaded', () => {
-      const { useImagePreloader } = require('../../hooks/useImagePreloader');
-      useImagePreloader.mockReturnValue({
+      // Mock is defined at the top of the file
+      vi.mocked(useImagePreloader).mockReturnValue({
         loaded: false,
         error: null,
       });
@@ -145,8 +150,8 @@ describe('NineSlice', () => {
     });
 
     it('shows error state when image loading fails', () => {
-      const { useImagePreloader } = require('../../hooks/useImagePreloader');
-      useImagePreloader.mockReturnValue({
+      // Mock is defined at the top of the file
+      vi.mocked(useImagePreloader).mockReturnValue({
         loaded: false,
         error: 'Failed to load image',
       });
@@ -156,8 +161,8 @@ describe('NineSlice', () => {
     });
 
     it('shows custom error content when provided', () => {
-      const { useImagePreloader } = require('../../hooks/useImagePreloader');
-      useImagePreloader.mockReturnValue({
+      // Mock is defined at the top of the file
+      vi.mocked(useImagePreloader).mockReturnValue({
         loaded: false,
         error: 'Load error',
       });
@@ -173,28 +178,27 @@ describe('NineSlice', () => {
 
   describe('Slice configuration', () => {
     it('handles numeric slice configuration', () => {
-      render(<NineSlice src="test.png" slices={15} />);
-      expect(screen.getByRole('generic')).toBeInTheDocument();
+      const { container } = render(<NineSlice src="test.png" slices={15} />);
+      expect(container.firstChild).toBeInTheDocument();
     });
 
     it('handles object slice configuration', () => {
-      render(
+      const { container } = render(
         <NineSlice
           src="test.png"
           slices={{ top: 10, right: 20, bottom: 15, left: 5 }}
         />
       );
-      expect(screen.getByRole('generic')).toBeInTheDocument();
+      expect(container.firstChild).toBeInTheDocument();
     });
 
     it('validates slice configuration', () => {
-      const { validateSlices } = require('../../utils/validation');
-      validateSlices.mockReturnValue({
+      vi.mocked(validateSlices).mockReturnValue({
         isValid: false,
         errors: ['Invalid slice values'],
       });
 
-      const onError = jest.fn();
+      const onError = vi.fn();
       render(<NineSlice {...defaultProps} onError={onError} />);
       
       expect(onError).toHaveBeenCalledWith(
@@ -229,14 +233,14 @@ describe('NineSlice', () => {
 
   describe('Event handlers', () => {
     it('calls onLoad when images are loaded', async () => {
-      const onLoad = jest.fn();
-      const { useImagePreloader } = require('../../hooks/useImagePreloader');
+      const onLoad = vi.fn();
+      // Mock is defined at the top of the file
       
       // First render with loading state
       const { rerender } = render(<NineSlice {...defaultProps} onLoad={onLoad} />);
       
       // Then simulate loaded state
-      useImagePreloader.mockReturnValue({
+      vi.mocked(useImagePreloader).mockReturnValue({
         loaded: true,
         error: null,
       });
@@ -249,14 +253,14 @@ describe('NineSlice', () => {
     });
 
     it('calls onError when image loading fails', async () => {
-      const onError = jest.fn();
-      const { useImagePreloader } = require('../../hooks/useImagePreloader');
+      const onError = vi.fn();
+      // Mock is defined at the top of the file
       
       // First render with loading state
       const { rerender } = render(<NineSlice {...defaultProps} onError={onError} />);
       
       // Then simulate error state
-      useImagePreloader.mockReturnValue({
+      vi.mocked(useImagePreloader).mockReturnValue({
         loaded: false,
         error: 'Network error',
       });
@@ -327,7 +331,7 @@ describe('NineSlice', () => {
 
   describe('Nine images mode', () => {
     it('warns about unimplemented nine images mode', () => {
-      const consoleSpy = jest.spyOn(console, 'warn');
+      const consoleSpy = vi.spyOn(console, 'warn');
       
       const images = {
         topLeft: 'tl.png',

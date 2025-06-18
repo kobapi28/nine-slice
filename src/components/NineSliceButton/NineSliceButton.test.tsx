@@ -1,10 +1,12 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { NineSliceButton, NineSliceButtonProps } from './NineSliceButton';
 
 // Mock the CSS module
-jest.mock('./NineSliceButton.module.css', () => ({
+vi.mock('./NineSliceButton.module.css', () => ({
+  default: {
   nineSliceButton: 'nineSliceButton',
   'variant-primary': 'variant-primary',
   'variant-secondary': 'variant-secondary',
@@ -41,10 +43,11 @@ jest.mock('./NineSliceButton.module.css', () => ({
   text: 'text',
   textHidden: 'textHidden',
   buttonElement: 'buttonElement',
+  },
 }));
 
 // Mock the NineSlice component
-jest.mock('../NineSlice/NineSlice', () => ({
+vi.mock('../NineSlice/NineSlice', () => ({
   NineSlice: ({ children, className, ...props }: any) => (
     <div className={className} {...props}>
       {children}
@@ -60,7 +63,7 @@ describe('NineSliceButton', () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Rendering', () => {
@@ -136,7 +139,7 @@ describe('NineSliceButton', () => {
     });
 
     it('prevents click when disabled', () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       render(<NineSliceButton {...defaultProps} disabled onClick={onClick} />);
       
       fireEvent.click(screen.getByRole('button'));
@@ -180,7 +183,7 @@ describe('NineSliceButton', () => {
     });
 
     it('prevents click when loading', () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       render(<NineSliceButton {...defaultProps} loading onClick={onClick} />);
       
       fireEvent.click(screen.getByRole('button'));
@@ -347,7 +350,7 @@ describe('NineSliceButton', () => {
 
   describe('Event handlers', () => {
     it('calls onClick when clicked', () => {
-      const onClickSpy = jest.fn();
+      const onClickSpy = vi.fn();
       render(<NineSliceButton {...defaultProps} onClick={onClickSpy} />);
       
       fireEvent.click(screen.getByRole('button'));
@@ -355,7 +358,7 @@ describe('NineSliceButton', () => {
     });
 
     it('calls onFocus when focused', () => {
-      const onFocusSpy = jest.fn();
+      const onFocusSpy = vi.fn();
       render(<NineSliceButton {...defaultProps} onFocus={onFocusSpy} />);
       
       fireEvent.focus(screen.getByRole('button'));
@@ -363,7 +366,7 @@ describe('NineSliceButton', () => {
     });
 
     it('calls onBlur when blurred', () => {
-      const onBlurSpy = jest.fn();
+      const onBlurSpy = vi.fn();
       render(<NineSliceButton {...defaultProps} onBlur={onBlurSpy} />);
       
       fireEvent.blur(screen.getByRole('button'));
@@ -371,7 +374,7 @@ describe('NineSliceButton', () => {
     });
 
     it('calls onKeyDown when key is pressed', () => {
-      const onKeyDownSpy = jest.fn();
+      const onKeyDownSpy = vi.fn();
       render(<NineSliceButton {...defaultProps} onKeyDown={onKeyDownSpy} />);
       
       fireEvent.keyDown(screen.getByRole('button'), { key: 'Tab' });
