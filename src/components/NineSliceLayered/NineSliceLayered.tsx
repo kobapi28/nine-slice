@@ -98,7 +98,7 @@ export const NineSliceLayered: React.FC<NineSliceLayeredProps> = ({
   children,
   shadow,
   effects,
-  optimizeRendering = true,
+  optimizeRendering: _optimizeRendering = true,
   enableGPUAcceleration = true,
   onLoad,
   onError,

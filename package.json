@@ -1,13 +1,22 @@
 {
-  "name": "nine-slice",
+  "name": "react-nine-slice",
   "version": "0.1.0",
-  "description": "A React TypeScript library",
+  "description": "A powerful React component library for creating scalable UI elements using the nine-slice (9-patch) technique. Perfect for game interfaces, scalable buttons, dialogs, and decorative frames.",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -17,27 +26,44 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --ignore-pattern 'src/stories/**'",
     "format": "prettier --write src/**/*.{ts,tsx}",
+    "typecheck": "tsc --project tsconfig.build.json --noEmit",
+    "ci": "npm run lint && npm run typecheck && npm run test && npm run build",
     "prepare": "npm run build",
+    "prepublishOnly": "npm run ci",
+    "release": "node scripts/release.js",
+    "release:patch": "npm run release patch",
+    "release:minor": "npm run release minor",
+    "release:major": "npm run release major",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/nine-slice.git"
+    "url": "git+https://github.com/kobapi28/nine-slice.git"
   },
   "keywords": [
     "react",
     "typescript",
-    "library"
+    "nine-slice",
+    "9-patch",
+    "ui-components",
+    "game-ui",
+    "scalable-ui",
+    "button",
+    "dialog",
+    "progress-bar",
+    "frame",
+    "react-component",
+    "component-library"
   ],
-  "author": "",
+  "author": "kobapi28",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/nine-slice/issues"
+    "url": "https://github.com/kobapi28/nine-slice/issues"
   },
-  "homepage": "https://github.com/yourusername/nine-slice#readme",
+  "homepage": "https://github.com/kobapi28/nine-slice#readme",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
@@ -55,15 +81,16 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-react": "^4.5.2",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-storybook": "^9.0.12",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",

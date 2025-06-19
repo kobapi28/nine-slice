@@ -31,7 +31,7 @@ export const NineSlice: React.FC<NineSliceProps> = ({
   maxHeight,
   fill = 'stretch',
   edgeMode,
-  centerMode,
+  centerMode: _centerMode,
   renderMode = 'css',
   children,
   contentPadding = 0,
