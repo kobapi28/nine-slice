@@ -1,0 +1,81 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Nine-Slice React Component Library
+
+Welcome to the Nine-Slice React Component Library! This collection provides versatile, scalable UI components using the nine-slice (9-patch) technique, perfect for game interfaces and stylized applications.
+
+## 🎮 What is Nine-Slice?
+
+Nine-slice (also known as 9-patch) is a technique for scaling UI elements while preserving corner and edge details. The image is divided into 9 sections:
+
+- **4 corners**: Never scaled (preserve detail)
+- **4 edges**: Scaled in one dimension only
+- **1 center**: Scaled in both dimensions
+
+This allows UI elements to maintain their visual integrity at any size.
+
+## 📦 Available Components
+
+### Core Components
+
+- **NineSlice** - The base component for nine-slice rendering
+- **NineSliceButton** - Interactive buttons with hover/press effects
+- **NineSliceBar** - Progress/health bars with animations
+- **NineSliceFrame** - Decorative frames with various styles
+- **NineSliceDialog** - Modal dialogs with animations
+
+### Features
+
+✅ **TypeScript Support** - Full type safety and IntelliSense  
+✅ **Game-Ready Presets** - Fantasy, medieval, sci-fi, and more  
+✅ **Responsive Design** - Works on all screen sizes  
+✅ **Accessibility** - ARIA compliant and keyboard navigation  
+✅ **Performance Optimized** - Image caching and efficient rendering  
+✅ **CSS Modules** - Scoped styling without conflicts  
+
+## 🚀 Quick Start
+
+```jsx
+import { NineSliceButton } from 'nine-slice';
+
+function App() {
+  return (
+    <NineSliceButton 
+      variant="primary" 
+      preset="fantasy"
+      onClick={() => console.log('Adventure awaits!')}
+    >
+      Start Quest
+    </NineSliceButton>
+  );
+}
+```
+
+## 🎨 Styling Presets
+
+Each component comes with built-in presets optimized for different use cases:
+
+- **Fantasy** - Magical themes with ornate designs
+- **Medieval** - Classic RPG styling  
+- **Sci-Fi** - Futuristic interfaces
+- **Retro** - Pixel art and nostalgic designs
+- **Modern** - Clean, contemporary look
+
+## 📖 Explore the Components
+
+Use the sidebar to explore each component's documentation and interactive examples. Each story demonstrates different configurations and use cases.
+
+## 🛠 Development
+
+This library is built with:
+- React 18+ with TypeScript
+- CSS Modules for styling
+- Vitest for testing
+- Rollup for bundling
+- Storybook for documentation
+
+---
+
+*Ready to build amazing interfaces? Start exploring the components!* ✨

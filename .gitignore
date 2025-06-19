@@ -111,3 +111,4 @@ public/
 
 # Stores VSCode versions used on dev containers
 .devcontainer/devcontainer.lock
+*storybook.log

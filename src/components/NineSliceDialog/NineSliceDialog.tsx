@@ -8,12 +8,18 @@ export interface NineSliceDialogProps {
   open: boolean;
   /** Called when the dialog should close */
   onClose?: () => void;
+  /** Dialog content */
+  children?: ReactNode;
   /** Dialog title */
   title?: ReactNode;
   /** Dialog header content */
   header?: ReactNode;
   /** Dialog footer content */
   footer?: ReactNode;
+  /** Additional CSS class name */
+  className?: string;
+  /** Additional styles */
+  style?: React.CSSProperties;
   /** Whether to show the close button */
   showCloseButton?: boolean;
   /** Whether to close on overlay click */
@@ -33,7 +39,12 @@ export interface NineSliceDialogProps {
   /** Custom overlay styles */
   overlayStyle?: React.CSSProperties;
   /** Padding inside the dialog content */
-  contentPadding?: number | string;
+  contentPadding?: number | {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+  };
   /** Maximum width of the dialog */
   maxWidth?: number | string;
   /** Maximum height of the dialog */
@@ -137,6 +148,7 @@ export const NineSliceDialog: React.FC<NineSliceDialogProps> = ({
         document.body.style.overflow = originalOverflow;
       };
     }
+    return undefined;
   }, [open, disableBodyScroll]);
 
   // Handle dialog open/close animations
@@ -178,6 +190,7 @@ export const NineSliceDialog: React.FC<NineSliceDialogProps> = ({
       
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [open, autoFocus, restoreFocus, onOpen, onAfterClose, isVisible]);
 
   // Handle escape key
@@ -231,6 +244,7 @@ export const NineSliceDialog: React.FC<NineSliceDialogProps> = ({
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
+    return undefined;
   }, [open, handleKeyDown]);
 
   // Don't render anything if not visible
